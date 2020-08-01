@@ -1,6 +1,6 @@
 const express = require('express');
 const { request, response } = require('express');
-const pool = require('./utils//db');
+const pool = require('./utils/db');
 const app = express() ;
 
 app.get('/users',(request,response) => {
