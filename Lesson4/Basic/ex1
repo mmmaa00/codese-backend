@@ -1,0 +1,77 @@
+DROP DATABASE IF EXISTS `basic1`
+CREATE DATABASE `basic1`
+USE `basic1`
+CREATE TABLE `customers` (
+    `customerID` varchar(20),
+    `fullName` varchar(100),
+    `phone` varchar(100),
+    `office` varchar(100)
+)
+INSERT INTO `customers` (`customerID`, `fullName`, `phone`, `office`) VALUES ('a01', 'Nguyễn Thu Thảo', '0986134296', 'Công ty TNHH Thành Công');
+INSERT INTO `customers` (`customerID`, `fullName`, `phone`, `office`) VALUES ('a02', 'Đào Thúy Quỳnh', '0996960236', 'Công ty TNHH Rạng Đông');
+INSERT INTO `customers` (`customerID`, `fullName`, `phone`, `office`) VALUES ('a03', 'Trần Tuấn Tú', '0976222233', 'Bệnh viện Bạch Mai');
+INSERT INTO `customers` (`customerID`, `fullName`, `phone`, `office`) VALUES ('a04', 'Lê Công Vinh', '0912584753', 'Công ty TNHH Thành Công');
+INSERT INTO `customers` (`customerID`, `fullName`, `phone`, `office`) VALUES ('b01', 'Phạm Xuân Mai', '0909908712', 'Ủy ban nhân dân quận Đồng Đa');
+INSERT INTO `customers` (`customerID`, `fullName`, `phone`, `office`) VALUES ('b02', 'Nguyễn Văn Long', '0955678399', 'Công ty TNHH Rạng Đông');
+INSERT INTO `customers` (`customerID`, `fullName`, `phone`, `office`) VALUES ('b03', 'Hồ Kim Tú', '0969966696', 'Du lịch Xanh');
+INSERT INTO `customers` (`customerID`, `fullName`, `phone`, `office`) VALUES ('b04', 'Lê Trung', '0912398854', 'Du lịch Xanh');
+CREATE TABLE `homeforrent` (
+    `homeID` varchar(20),
+    `address` varchar(100),
+    `rents` int,
+    `lanlordName` varchar(100)
+)
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('001', 'Long Biên', '25000000', 'Nông Văn Dền');
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('002', 'Thanh Xuân', '5000000', 'Mai Quỳnh Phương');
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('003', 'Long Biên', '6000000', 'Đỗ Tuấn Long');
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('004', 'Đống Đa', '15000000', 'Nguyễn Phương Linh');
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('005', 'Hai Bà Trưng', '12000000', 'Nguyễn Phương Linh');
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('006', 'Lạc Long Quân', '12000000', 'Đào Đức Trung');
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('007', 'Đống Đa', '10000000', 'Nông Văn Dền');
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('008', 'Long Biên', '26000000', 'Mai Quỳnh Phương');
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('009', 'Hoàn Kiếm', '50000000', 'Lưu Hương Giang');
+INSERT INTO `homeforrent` (`homeID`, `address`, `rents`, `lanlordName`) VALUES ('010', 'Hoàn Kiếm', '34000000', 'Đàm Thu Trang');
+CREATE TABLE `contracts` (
+  `homeID` varchar(20),
+  `customerID` varchar(20),
+  `checkIn` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `checkOut` timestamp DEFAULT CURRENT_TIMESTAMP 
+)
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('001', 'a01', '2020-12-24', '2020-12-31');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('005', 'a02', '2020-04-27', '2020-07-12');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('006', 'a01', '2020-05-13', '2020-05-20');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('008', 'a02', '2020-04-26', '2020-09-12');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('006', 'b01', '2020-07-15', '2020-07-15');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('007', 'a03', '2020-04-03', '2020-07-30');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('005', 'b01', '2020-08-08', '2020-08-10');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('004', 'b02', '2020-01-31', '2020-07-31');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('002', 'a03', '2020-09-14', '2020-09-16');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('001', 'a04', '2020-04-21', '2020-12-12');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('004', 'b04', '2020-08-19', '2020-11-11');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('002', 'a04', '2020-02-20', '2020-03-02');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('003', 'a03', '2020-02-25', '2020-26-02');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('002', 'b01', '2020-04-29', '2020-05-03');
+INSERT INTO `contracts` (`homeID`, `customerID`, `checkIn`, `checkOut`) VALUES ('010', 'b02', '2020-04-01', '2020-12-06');
+
+Questions:
+1. Danh sách (`address`,`lanlordName`) của những ngôi nhà có giá thuê ít hơn 10 triệu
+	SELECT `address`, `lanlordName`
+	FROM `homeforrent`
+	WHERE `homeforrent`.`rents` < 10000000
+2. Danh sách (`customerID`,`fullName`,`office`) của những người đã từng thuê nhà của chủ nhà có tên là "Nông Văn Dền"	
+	SELECT DISTINCT `customers`.`customerID`, `customers`.`fullName`, `customers`.`office`
+	FROM `contracts`
+	INNER JOIN `customers` ON `customers`.`customerID`=`contracts`.`customerID`
+    INNER JOIN `homeforrent` ON `homeforrent`.`homeID` = `contracts`.`homeID`
+    AND `homeforrent`.`lanlordName` = 'Nông Văn Dền'
+3. Danh sách các ngôi nhà chưa từng được ai thuê
+	SELECT `homeforrent`.`homeID`,`homeforrent`.`address`
+	FROM `homeforrent` 
+	WHERE NOT EXISTS (
+		SELECT *
+		FROM `contracts`
+		WHERE `contracts`.`homeID` = `homeforrent`.`homeID`
+    )
+4. Giá thuê cao nhất trong số các giá thuê của các ngôi nhà đã từng ít nhất một lần được thuê
+	SELECT MAX(`homeforrent`.`rents`)
+	FROM `homeforrent` INNER JOIN `contracts` ON `homeforrent`.`homeID` = `contracts`.`homeID`
