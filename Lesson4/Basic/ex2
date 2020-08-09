@@ -1,0 +1,111 @@
+DROP DATABASE IF EXISTS `basic2`
+CREATE DATABASE `basic2`
+USE `basic2`
+CREATE TABLE `customers` (
+    `customerID` varchar(20) PRIMARY KEY,
+    `fullName` varchar(100),
+    `address` varchar(100)
+)
+INSERT INTO `customers` (`customerID`, `fullName`, `address`) VALUES ('a01', 'Nguyễn Thu Thảo', 'Hà Nội');
+INSERT INTO `customers` (`customerID`, `fullName`, `address`) VALUES ('a02', 'Đào Thúy Quỳnh', 'Hà Nội');
+INSERT INTO `customers` (`customerID`, `fullName`, `address`) VALUES ('a03', 'Trần Tuấn Tú', 'Nha Trang');
+INSERT INTO `customers` (`customerID`, `fullName`, `address`) VALUES ('a04', 'Lê Công Vinh', 'Bà Rịa - Vũng Tàu');
+INSERT INTO `customers` (`customerID`, `fullName`, `address`) VALUES ('b01', 'Phạm Xuân Mai', 'Hà Nội');
+INSERT INTO `customers` (`customerID`, `fullName`, `address`) VALUES ('b02', 'Nguyễn Văn Long', 'TP Hồ Chí Minh');
+INSERT INTO `customers` (`customerID`, `fullName`, `address`) VALUES ('b03', 'Hồ Kim Tú', 'TP Hồ Chí Minh');
+INSERT INTO `customers` (`customerID`, `fullName`, `address`) VALUES ('b04', 'Lê Trung', 'Nha Trang');
+
+CREATE TABLE `hotels` (
+    `hotelID` varchar(20) PRIMARY KEY,
+    `name` varchar(100),
+    `address` varchar(100)
+)
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('001', 'Melia', 'London');
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('002', 'Le Meurice', 'Hà Nội');
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('003', 'Marriott', 'USA');
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('004', 'Worldwide', 'Paris');
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('005', 'St.Regis', 'Singapore');
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('006', 'Lotte Hotel', 'Busan');
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('007', 'Park Hyatt', 'Busan');
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('008', 'The Siam', 'Thailand');
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('009', 'Marina Bay Sands', 'Singapore');
+INSERT INTO `hotels` (`hotelID`,`name`, `address`) VALUES ('010', 'Daewoo', 'Hà Nội');
+
+CREATE TABLE `rooms` (
+  `roomID` varchar(20) PRIMARY KEY,
+  `hotelID` varchar(20),
+  `typeOfRoom` varchar(20),
+  `price` int
+)
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('1vip01','001','vip',1000000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('5vvip01','005','vvip',5000000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('6vip02','002','vip',700000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('8vvip03','003','vvip',15500000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('6vip01','006','vip',650000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('7vip04','007','vip',2600000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('5vip02','005','vip',3900000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('4vvip01','004','vvip',7000000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('2vvip04','002','vvip',36000000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('1vvip02','001','vvip',1700000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('4vvip03','004','vvip',3300000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('2vvip03','002','vip',1100000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('3vip02','003','vip',900000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('2vvip02','002','vip',85000000);
+INSERT INTO `rooms` (`roomID`,`hotelID`,`typeOfRoom`,`price`) VALUES ('10vip04','010','vip',3400000);
+
+
+CREATE TABLE `booking` (
+  `hotelID` varchar(20),
+  `customerID` varchar(20),
+  `checkIn` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `checkOut` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `roomID` varchar(20)
+)
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('001', 'a01', '2020-12-24', '2020-12-31','1vip01');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('005', 'a02', '2020-04-27', '2020-07-12','5vvip01');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('006', 'a01', '2020-05-13', '2020-05-20','6vip02');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('008', 'a02', '2020-04-26', '2020-09-12','8vvip03');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('006', 'b01', '2020-07-15', '2020-07-15','6vip01');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('007', 'a03', '2020-04-03', '2020-07-30','7vip04');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('005', 'b01', '2020-08-08', '2020-08-10','5vip02');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('004', 'b02', '2020-01-31', '2020-07-31','4vvip01');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('002', 'a03', '2020-09-14', '2020-09-16','2vvip04');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('001', 'a04', '2020-04-21', '2020-12-12','1vvip02');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('004', 'b04', '2020-08-19', '2020-11-11','4vvip03');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('002', 'a04', '2020-02-20', '2020-03-02','2vvip03');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('003', 'a03', '2020-02-25', '2020-26-02','3vip02');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('002', 'b01', '2020-04-29', '2020-05-03','2vvip02');
+INSERT INTO `booking` (`hotelID`, `customerID`, `checkIn`, `checkOut`,`roomID`) VALUES ('010', 'b02', '2020-04-01', '2020-12-06','10vip04');
+
+1. Danh sách price và typeOfRoom của tất cả các phòng của khách sạn Melia
+	SELECT `price`,`typeOfRoom`
+	FROM `rooms`,`hotels`
+	WHERE `rooms`.`hotelID` = `hotels`.`hotelID`
+	AND `hotels`.`name` = 'Melia'
+2. Liệt kê khách hàng đang ở khách sạn Melia
+	SELECT `booking`.`customerID`,`fullName`
+	FROM `booking`
+	INNER JOIN `customers` ON `booking`.`customerID` = `customers`.`customerID`
+	INNER JOIN `hotels` ON `hotels`.`hotelID` = `booking`.`hotelID`
+	AND `hotels`.`name` = 'Melia'
+3. Liệt kê tất cả các phòng tại khách sạn Melia và tên khách đang ở phòng đó nếu phòng đó có người
+	SELECT `rooms`.`roomID`, `rooms`.`typeOfRoom`, `rooms`.`price`
+	FROM `rooms`
+	INNER JOIN `booking` ON `booking`.`roomID` = `rooms`.`roomID`
+	INNER JOIN `hotels` ON `booking`.`hotelID` = `hotels`.`hotelID`
+	AND `hotels`.`name` = 'Melia'
+4. Liệt kê các phòng chưa có người ở tại khách sạn Melia từ trước đến nay
+	SELECT `rooms`.`roomID`
+	FROM `rooms`
+	WHERE NOT EXISTS (
+		SELECT `booking`.`roomID`
+		FROM `booking`,`rooms`
+		WHERE `booking`.`roomID` = `rooms`.`roomID`
+	)
+5. Cho biết tổng số phòng của mỗi khách sạn tại London
+	SELECT COUNT(`hotels`.`hotelID`)
+	FROM `hotels`
+	WHERE `hotels`.`address` like '%London'
+6. Tăng đơn giá của tất cả các phòng lên thêm 5%
+	UPDATE `rooms`
+	SET `rooms`.price = price * 1.05
