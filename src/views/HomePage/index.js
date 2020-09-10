@@ -1,5 +1,7 @@
 import React from 'react'; //ES5
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../../api'
+import notistack from 'notistack'
 import {
   TextField,
   Typography,
@@ -22,25 +24,22 @@ class HomePage extends React.Component{
         size: 8
       }
   }
-  async componentDidMount() {
-    // const params = {
-    //   size: 10,
-    //   page: 1
-    // }
-    const linkApi = 'http://localhost:5000/api/v1/product'
-    const res = await axios.get(linkApi, {
-      params: {
-        page: this.state.page,
-        size: this.state.size
-      }
+  async fetchData() {
+    const res = await api.product.getAllProduct({
+      page: this.state.page,
+      size: this.state.size
     })
-    console.log(res.data.data);
-    this.setState( {
-      listProduct: res.data.data,
-      metadata: res.data.metadata,
-      total: res.data.metadata.total
+    if(res.status){
+      this.setState({
+        listProduct: res.data.data,
+        total: res.data.metadata.total
+      })
+    } else {
+      console.log(res.message);
     }
-    )
+  }
+  async componentDidMount() {
+    await this.fetchData();
   }
   hamRenderProduct = (product) => {
     return <Card>
@@ -55,33 +54,23 @@ class HomePage extends React.Component{
       </CardActions>
     </Card>
   }
-  prevPage = () => {
-    if(this.state.page <= 1) {
-      alert('Error!')
-    }
-    else {
-      this.setState((preState) => {
-        return {
-          ...this.state,
-          page: this.state.page - 1
-        }
+  prevPage = async () => {
+    if(this.state.page > 1) {
+       await this.setState({
+        page: this.state.page - 1
       })
+      await this.fetchData()
     }
   }
-  nextPage = () => {
-    if(this.state.page >= (Math.ceil(this.state.total/this.state.size))) {
-      alert('Error!')
-    }
-    else {
-      this.setState((nextState) => {
-        return {
-          ...this.state,
+  nextPage = async () => {
+    if(this.state.page < (Math.ceil(this.state.total/this.state.size))) {
+        await this.setState({
           page: this.state.page + 1
-        }
-      })
+        })
+        await this.fetchData()
     }
   }
-  render(){
+  render() {
     return (
       <div>
           <Typography> Total: {this.state.total}</Typography>
@@ -97,4 +86,4 @@ class HomePage extends React.Component{
     )
   }
 }
-export default HomePage;
+export default HomePage
